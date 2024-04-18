@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Location 1</title>
+  <link rel="stylesheet" type="text/css" href="Location1.css" />
+  <link rel="icon" href="technologo.jpg">
+</head>
+
+<body>
+  <!-- <script type="text/javascript">
+    function show1() {
+      var myDiv = document.getElementsByClassName("parent_container");
+      var toggleButton = document.getElementById("toggle");
+      Array.from(myDiv).forEach((x) =>{
+        if (x.style.display === "none") {
+        // Show the div
+        x.style.display = "grid";
+        toggleButton.textContent = "show Location 1";
+      } else {
+        // Hide the div
+        x.style.display = "none";
+        toggleButton.textContent = "hide Location 1";
+      }
+      })
+     
+    }
+  </script> -->
+  <!-- <button id="toggle" onclick="show1()">
+    >
+  </button> -->
+  <div class="parent_container">
+
+    <div class="container">
+
+      <h1>Location 1</h1>
+      <h2>22.5781984389, 88.4757596254</h2>
+      <hr />
+      <p>
+      <div class="data">
+        <span>Temperature : </span><span id="temp"></span><span style="margin-left:5px">°C</span>
+      </div>
+      </p>
+      <p>
+      <div class="data">
+        <span>Humidity : </span><span id="humid"></span><span style="margin-left:5px">%</span>
+      </div>
+      </p>
+      <p>
+      <div class="data">
+        <span>Heat Index : </span><span id="heatI"></span><span style="margin-left:5px">°C</span>
+      </div>
+      </p>
+      <p>
+      <div class="data">
+        <span>PM 2.5 : </span><span id="pm"></span><span style="margin-left:5px">ug/m3</span>
+      </div>
+      </p>
+      <p>
+      <div class="data">
+        <span>Methane : </span><span id="meth"></span><span style="margin-left:5px">ppm</span>
+      </div>
+      </p>
+      <p>
+      <div class="data">
+        <span>Carbonmonoxide : </span><span id="co"></span><span style="margin-left:5px">ppm</span>
+      </div>
+      </p>
+      <p>
+      <div class="data">
+        <span>Flammable gas : </span><span id="fg"></span><span style="margin-left:5px">ppm</span>
+      </div>
+      </p>
+      <p>
+      <div class="data">
+        <span>Carbondioxide : </span><span id="co2"></span><span style="margin-left:5px">ppm</span>
+      </div>
+      </p>
+    </div>
+
+    <div class="map_box">
+      <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=techno%20international%20new%20town+(Location%201)&amp;t=h&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+        <a href="https://www.maps.ie/population/"> Population mapping </a>
+      </iframe>
+    </div>
+  </div>
+</body>
+<script>
+  if (!!window.EventSource) {
+    var source = new EventSource('/events');
+
+    source.addEventListener('open', function (e) {
+      console.log("Events Connected");
+    }, false);
+    source.addEventListener('error', function (e) {
+      if (e.target.readyState != EventSource.OPEN) {
+        console.log("Events Disconnected");
+      }
+    }, false);
+
+    source.addEventListener('message', function (e) {
+      console.log("message", e.data);
+    }, false);
+
+    source.addEventListener('new_readings', function (e) {
+      console.log("new_readings", e.data);
+      var obj = JSON.parse(e.data);
+      document.getElementById("temp").innerHTML = obj.Temp.toFixed(2);
+      document.getElementById("humid").innerHTML = obj.Humid.toFixed(2);
+      document.getElementById("heatI").innerHTML = obj.HeatI.toFixed(2);
+      document.getElementById("pm").innerHTML = obj.Pm.toFixed(2);
+      document.getElementById("meth").innerHTML = obj.Meth.toFixed(2);
+      document.getElementById("co").innerHTML = obj.Co.toFixed(2);
+      document.getElementById("fg").innerHTML = obj.Fg.toFixed(2);
+      document.getElementById("co2").innerHTML = obj.Co2.toFixed(2);
+
+    }, false);
+  }
+</script>
+
+</html>
